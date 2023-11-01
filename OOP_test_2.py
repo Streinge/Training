@@ -1,5 +1,3 @@
-import operator
-
 class Node:
     def __init__(self, key, left=None, right=None):
         """Create a new tree node."""
@@ -18,10 +16,11 @@ class Node:
         return list_full
 
     def __repr__(self):
-        return f"{self.__class__.__name__}({self.key!r}, {self.left}, {self.right})"
+        x = self.__class__.__name__
+        return f"{x}({self.key!r}, {self.left}, {self.right})"
 
     def to_list(self):
-        list_full =[]
+        list_full = []
         list_full_new = self._list_nodes(list_full)[:]
         sum_keys = []
         for x in list_full_new:
@@ -46,7 +45,6 @@ class Node:
             if operation(key) is False:
                 return False
         return True
-                
 
     def some(self, operation):
         list_keys = self.to_list()
@@ -55,11 +53,6 @@ class Node:
                 return True
         return False
 
-"""class N(Node):
-
-    def __repr__(self):
-        return f"N({self.key!r}, {self.left}, {self.right})" """
- 
 
 tree = Node(
     9,
@@ -90,7 +83,5 @@ tree2 = Node(3, Node(1), Node(2))
 print(tree2)
 print(tree.every(lambda key: key <= 22))  # True
 print(tree.some(lambda key: key > 22))  # False
-print(tree.every(lambda key: key < 22)) # False
-print(tree.some(lambda key: key == 22)) # True
-tree_of_n = N(3, N(1), N(2))
-print(repr(tree_of_n))
+print(tree.every(lambda key: key < 22))  # False
+print(tree.some(lambda key: key == 22))  # True
