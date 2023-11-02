@@ -1,36 +1,19 @@
 class Node:
-      def __init__(self,data):
-            self.data=data
-            self.left=None
-            self.right=None
-class tree:
+    def __init__(self, key, left=None, right=None):
+        """Create a new tree node."""
+        self.key = key
+        self.left = left
+        self.right = right
 
-     def __init__(self):
-           self.root=None
+    def __repr__(self):
+        return f"Node({self.key!r}, {self.left}, {self.right})"
 
-     def insert(self,data):
-           if(self.root==None):
-                  self.root=Node(data)
-           else:
-                  self._insert(data,self.root)
+"""class N(Node):
+    def __repr__(self):
+        return f"N({self.key!r}, {self.left}, {self.right})"    """
 
 
-     def _insert(self, data, curNode):
-           if(curNode.data>data):
-                  if(curNode.left==None):
-                         curNode.left=Node(data)
-
-                  else:
-                         self._insert(data,curNode.left)
-           else:
-                   if(curNode.right==None):
-                         curNode.right=Node(data)
-                   else:
-                         self._insert(data,curNode.right)
-
-f = Node(9)
-print(f.__dict__)
-x = tree()
-print(x.__dict__)
-x.insert(17)
-print(x.__dict__)
+tree2 = Node(3, Node(1), Node(2))
+print(tree2) # Node(3, Node(1, None, None), Node(2, None, None))
+tree_of_n = N(3, N(1), N(2))
+print(repr(tree_of_n)) # N(3, N(1, None, None), N(2, None, None))
