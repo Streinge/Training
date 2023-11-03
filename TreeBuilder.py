@@ -13,12 +13,14 @@ class TreeBuilder:
     @property
     def structure(self, list=[]):
         if self.descendant:
+            new_list = []
             for x in self.descendant:
+                tmp = x.structure(list)
                 list.append(x.key)
-                print(list)
-                print(self.descendant)
-                x.structure(list)
-        return list
+                x.structure(tmp_list)
+        else:
+            list.append(self.key)
+            return list
 
 
 
