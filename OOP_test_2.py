@@ -7,12 +7,16 @@ class Node:
 
 # BEGIN (write your solution here)
     def _list_nodes(self, list_full):
+        global i
+        i += 1
+        print(i)
         # список элементов дерева текущего уровня
         list_full.append(self)
         if self.left is not None:
             self.left._list_nodes(list_full)
         if self.right is not None:
             self.right._list_nodes(list_full)
+        print('дошло до конца')
         return list_full
 
     def __repr__(self):
@@ -53,7 +57,7 @@ class Node:
                 return True
         return False
 
-
+i = 0
 tree = Node(
     9,
     Node(

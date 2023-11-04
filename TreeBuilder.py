@@ -12,18 +12,24 @@ class TreeBuilder:
     
     @property
     def structure(self, list=[]):
+        global i
+        i += 1 
+        print(i)
+        list.append(self.key)
+        print('список ', list)
         if self.descendant:
-            new_list = []
             for x in self.descendant:
-                tmp = x.structure(list)
-                list.append(x.key)
-                x.structure(tmp_list)
-        else:
-            list.append(self.key)
-            return list
+                print('проверяем ', x.key)
+                print ('должно быть True ', x.descendant is True)
+                if x.descendant:
+                    x.structure(list)
+        print('дошло до конца')
+        return list
+    
 
 
 
+i = 0
 tree = TreeBuilder()
 print(tree)
 print(tree.__dict__) 
