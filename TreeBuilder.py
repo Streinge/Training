@@ -10,23 +10,38 @@ class TreeBuilder:
         self.descendant.append(tmp)
         return tmp
     
-    # @property
+    @property
     def structure(self, list_full=[]):
         global i
-        i += 1 
-        print(i)
-        if self.key:
-            list_full.append(self)
-            print('список ', list_full)
+        i += 1
+        # print(i)
+        # print('список ', list_full)
         if self.descendant:
-            for x in self.descendant:
-                print('x.key ', x.key)
-                x.structure(list_full)
-        print('дошло до конца')
+            if self.key is None:  
+                for x in self.descendant:
+                    # print('x.key ', x.key)
+                    list_full.append(x.key)
+                    # print('список ', list_full)
+                    # str = f"self.key:{self.key!r}, x:{x.key}, list_full:{list_full}"
+                    # print(str)
+                    x.structure(list_full)
+                    # print('После вызова')
+                    # str = f"self.key:{self.key!r}, x:{x.key}, list_full:{list_full}"
+                    # print(str)
+            else:
+                list_new = []
+                for x in self.descendant:
+                    # print('x.key ', x.key)
+                    list_new.append(x.key)
+                    # print('список новый ', list_new)
+                    # str = f"self.key:{self.key!r}, x:{x.key}, list_full:{list_full}"
+                    # print(str)
+                    x.structure(list_new)
+                    # print('После вызова')
+                    # str = f"self.key:{self.key!r}, x:{x.key}, list_full:{list_full}"
+                    # print(str)
+                list_full.append(list_new)
         return list_full
-    
-
-
 
 i = 0
 tree = TreeBuilder()
@@ -42,4 +57,4 @@ print(_1st.__dict__)
 print(_2st.__dict__)
 _4st = _1st.add('4st')
 print(_1st.__dict__)
-print(tree.structure())
+print(tree.structure)
