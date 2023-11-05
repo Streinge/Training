@@ -10,21 +10,20 @@ class TreeBuilder:
         self.descendant.append(tmp)
         return tmp
     
-    @property
-    def structure(self, list=[]):
+    # @property
+    def structure(self, list_full=[]):
         global i
         i += 1 
         print(i)
-        list.append(self.key)
-        print('список ', list)
+        if self.key:
+            list_full.append(self)
+            print('список ', list_full)
         if self.descendant:
             for x in self.descendant:
-                print('проверяем ', x.key)
-                print ('должно быть True ', x.descendant is True)
-                if x.descendant:
-                    x.structure(list)
+                print('x.key ', x.key)
+                x.structure(list_full)
         print('дошло до конца')
-        return list
+        return list_full
     
 
 
@@ -43,4 +42,4 @@ print(_1st.__dict__)
 print(_2st.__dict__)
 _4st = _1st.add('4st')
 print(_1st.__dict__)
-tree.structure
+print(tree.structure())

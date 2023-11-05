@@ -12,16 +12,24 @@ class Node:
         print(i)
         # список элементов дерева текущего уровня
         list_full.append(self)
+        print('self.key ', self.key)
+        print('list_full ', list_full)
         if self.left is not None:
+            print('зашло в левый')
             self.left._list_nodes(list_full)
         if self.right is not None:
+            print('self в правом', self)
+            print('list_full в правом ', list_full)
+            print('зашло в правый')
             self.right._list_nodes(list_full)
         print('дошло до конца')
+        print('self ', self)
+        print('list_full в конце ', list_full)
         return list_full
 
-    def __repr__(self):
+    """def __repr__(self):
         x = self.__class__.__name__
-        return f"{x}({self.key!r}, {self.left}, {self.right})"
+        return f"{x}({self.key!r}, {self.left}, {self.right})" """
 
     def to_list(self):
         list_full = []
@@ -79,7 +87,7 @@ tree = Node(
 )
 
 print(len(tree))  # 9
-print(tree.total())  # 96
+""" print(tree.total())  # 96
 print(tree.to_list())  # [9, 4, 8, 6, 3, 7, 17, 22, 20]
 print(tree.minimum())  # 3
 print(tree.maximum())  # 22
@@ -88,4 +96,5 @@ print(tree2)
 print(tree.every(lambda key: key <= 22))  # True
 print(tree.some(lambda key: key > 22))  # False
 print(tree.every(lambda key: key < 22))  # False
-print(tree.some(lambda key: key == 22))  # True
+print(tree.some(lambda key: key == 22))  # True"""
+
