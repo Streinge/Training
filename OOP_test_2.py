@@ -65,7 +65,7 @@ class Node:
                 return True
         return False
 
-i = 0
+
 tree = Node(
     9,
     Node(
@@ -97,4 +97,3 @@ print(tree.every(lambda key: key <= 22))  # True
 print(tree.some(lambda key: key > 22))  # False
 print(tree.every(lambda key: key < 22))  # False
 print(tree.some(lambda key: key == 22))  # True"""
-
