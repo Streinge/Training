@@ -1,30 +1,21 @@
 class TreeBuilder:
-    def __init__(self, key=None, parent=None):
+    def __init__(self, key=None):
         self.key = key
-        self.parent = parent
         self.descendant = []
-        self.cur = self
+        self.current = self
 
     def add(self, key):
-        print(self)
-        global i
-        i += 1
-        print(i)
-        print('self.cur из add', self.cur)
-        tmp = self.cur.__class__(key, parent=self)
-        print('новый объект', tmp)
-        self.cur.descendant.append(tmp)
-        print(self.cur.descendant)
+        tmp = self.__class__(key)
+        self.descendant.append(tmp)
+        self.current = tmp
         return tmp
 
     def __enter__(self):
-        print("Inside __enter__")
-        self.cur = self.descendant[0]
-        print('self.descendant ', self.descendant)
-        print(self.cur)
+        print('self.current ', self.current)
+        self.current = self.descendant[0]
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self = self.parent
+        return self
 
     def _structure(self, list_full):
         if self.descendant:
@@ -44,18 +35,16 @@ class TreeBuilder:
     def structure(self):
         return self._structure([])
 
-i = 0
 tree = TreeBuilder()
-print(tree)
-print(tree.__dict__)
 print(tree.structure)
-print(tree.add('1st').__dict__)
-print(tree.__dict__)
+_1st = tree.add('1st')
 print(tree.structure)
-print(tree.__dict__)
-print(tree.cur)
-with tree:
-    tree.add('2nd')
+"""with tree:
+    _2nd = tree.add('2nd')
     with tree:
-        tree.add('3rd')
+        _3st = tree.add('3rd')"""
 print(tree.structure)
+print(tree.__dict__)
+"""print(_1st.__dict__)
+print(_2nd.__dict__)
+print(_3st.__dict__)"""
