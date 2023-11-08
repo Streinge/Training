@@ -5,15 +5,16 @@ class TreeBuilder:
         self.current = self
         self.parent = parent
 
-    def add(self, key):
-        tmp = self.current.__class__(key, parent=self.current)
+    def add(self, value):
+        tmp = self.current.__class__(value, parent=self.current)
         self.current.descendant.append(tmp)
         return tmp
 
     def __enter__(self):
-        print('self.current ', self.current)
-        if self.current.descendant[0]:
-            self.current = self.current.descendant[0]
+        print('вход в ентер')
+        if self.current.descendant[-1]:
+            self.current = self.current.descendant[-1]
+            print(self.current.key)
 
     def __exit__(self, exc_type, exc_value, traceback):
         self.current = self.current.parent
@@ -36,8 +37,21 @@ class TreeBuilder:
     def structure(self):
         return self._structure([])
 
-
 tree = TreeBuilder()
+tree.add('root')
+with tree:
+    tree.add('first child')
+    tree.add('second child')
+    with tree:
+        tree.add('grandchild')
+    tree.add('bastard')
+    with tree:  # this subtree is empty intentionally
+        pass    # we need to do nothing
+    tree.add('another bastard')
+
+print(tree.structure)
+
+"""tree = TreeBuilder()
 print(tree.structure)
 tree.add('1st')
 print(tree.structure)
@@ -48,5 +62,4 @@ with tree:
     tree.add('4th')
     with tree:
         pass
-print(tree.structure)
-print(tree.__dict__)
+print(tree.structure)"""
