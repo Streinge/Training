@@ -11,7 +11,6 @@ class TreeBuilder:
         return tmp
 
     def __enter__(self):
-        print('вход в ентер')
         if self.current.descendant[-1]:
             self.current = self.current.descendant[-1]
             print(self.current.key)
