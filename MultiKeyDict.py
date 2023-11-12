@@ -1,42 +1,36 @@
 class MultiKeyDict:
     def __init__(self, **kwargs):
-        self.dict = kwargs
+        self.dict = {}
+        for key, values in kwargs.items():
+            list_value = []
+            list_value.append(values)
+            self.dict[key] = list_value
 
-    def __getitem__(self, value):
-        print('getitem  ', self.dict[value])
-        return self.dict[value][0]
+    def __getitem__(self, key):
+        return self.dict[key][0]
 
-    def __setitem__(self, x_new, y_new):
-        print('x_new, y_new ', x_new, y_new)
-        list_new = []
-        list_new.append(y_new)
-        print('list_new ', list_new)
-        self.dict[x_new] = list_new
+    def __setitem__(self, key, value):
+        self.dict[key][0] = value
 
     def alias(self, **kwargs):
-        # получение значения псеводнима
-        nickname = list(kwargs.keys())[0]
-        print(nickname)
-        # получение значения оригинала
-        original = kwargs[nickname]
-        print(original)
-        # запись значения по ключу оригинала в список
-        list_original = []
-        list_original.append(self.dict[original])
-        # перевод значения по ключу в список
-        self.__setitem__(original, list_original)
-        # добавление пары псевдоним-оригинал в исходный список
-        self.__setitem__(nickname, list_original)
+        for nickname in list(kwargs.keys()):
+            original = kwargs[nickname]
+            self.dict[nickname] = self.dict[original]
 
 
 mkd = MultiKeyDict(x=100, y=[10, 20])
-print(mkd.__dict__)
-
 mkd.alias(z='x')  # 'z' теперь означает то же, что и 'x'
-print('после z=x ', mkd.__dict__)
-print('mkd[x] ', mkd['x'])
-print('mkd[y] ', mkd['y'])
-print('mkd[z] ', mkd['z'])
-print(mkd.__dict__)
+print(mkd['z'])
 mkd['z'] += 1
+print(mkd['x'])
+mkd.alias(z='y')
+mkd['z'] += [30]
+print(mkd['y'])
+mkd = MultiKeyDict(a=1, b='foo')
 print(mkd.__dict__)
+print(mkd['a'])  # 1
+print(mkd['b'])  # 'foo'
+mkd.alias(aa='a', bb='b')
+print(mkd.__dict__)
+print(mkd['aa'])  # 1
+print(mkd['bb'])  # 'foo'

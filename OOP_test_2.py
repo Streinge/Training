@@ -1,35 +1,21 @@
 class Node:
     def __init__(self, key, left=None, right=None):
-        """Create a new tree node."""
         self.key = key
         self.left = left
         self.right = right
 
 # BEGIN (write your solution here)
     def _list_nodes(self, list_full):
-        global i
-        i += 1
-        print(i)
-        # список элементов дерева текущего уровня
         list_full.append(self)
-        print('self.key ', self.key)
-        print('list_full ', list_full)
         if self.left is not None:
-            print('зашло в левый')
             self.left._list_nodes(list_full)
         if self.right is not None:
-            print('self в правом', self)
-            print('list_full в правом ', list_full)
-            print('зашло в правый')
             self.right._list_nodes(list_full)
-        print('дошло до конца')
-        print('self ', self)
-        print('list_full в конце ', list_full)
         return list_full
 
-    """def __repr__(self):
+    def __repr__(self):
         x = self.__class__.__name__
-        return f"{x}({self.key!r}, {self.left}, {self.right})" """
+        return f"{x}({self.key!r}, {self.left}, {self.right})"
 
     def to_list(self):
         list_full = []
