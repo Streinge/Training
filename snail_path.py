@@ -35,11 +35,9 @@ def snail_path(matrix):
     return sum_list
 
 
-
-
 print(not snail_path([]))
 print(not snail_path([[]]))
-print(snail_path([[0]]) == [0]) 
+print(snail_path([[0]]) == [0])
 print(snail_path([[1, 2, 3]]) == [1, 2, 3])
 print(snail_path([[1], [2], [3], [4]]) == [1, 2, 3, 4])
 print(snail_path([
